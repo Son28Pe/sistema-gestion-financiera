@@ -1,6 +1,6 @@
 # Sistema de Gestión Financiera
 
-Proyecto final del curso **Diseño de Patrones** (SmartCity Solutions – opción 9).
+Proyecto final del curso **Diseño de Patrones**.
 Aplicación de **consola en Java**, enfocada en la **calidad del diseño**: patrones GOF, principios SOLID y GRASP.
 
 > 📌 Esta es una **guía general** para que el equipo trabaje alineado, no un contrato rígido.
