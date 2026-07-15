@@ -3,12 +3,11 @@ package controlador;
 import java.util.List;
 
 import excepciones.OperacionInvalidaException;
+import factory.FabricaCuentas;
 import interfaces.IRepositorio;
 import modelo.Cliente;
 import modelo.Cuenta;
-import modelo.CuentaAhorros;
 import observer.IObservador;
-import state.EstadoActiva;
 import util.Validador;
 
 // GRASP Controlador: coordina el CRUD de cuentas y sus operaciones. Depende de las interfaces
@@ -27,14 +26,21 @@ public class ControladorCuenta {
         this.observadores = observadores;
     }
 
+    // Mantengo la firma de 3 argumentos porque ya se usa en otras partes del proyecto;
+    // por defecto crea una cuenta de AHORROS.
     public Cuenta registrar(String numero, String titularDni, double saldoInicial) {
+        return registrar(numero, titularDni, saldoInicial, "AHORROS");
+    }
+
+    // Sobrecarga que permite elegir el tipo de cuenta (AHORROS, CORRIENTE, ...).
+    public Cuenta registrar(String numero, String titularDni, double saldoInicial, String tipo) {
         Validador.validarTexto(numero, "numero");
         Validador.requerirExistencia(repositorioClientes.buscarPorId(titularDni), "cliente " + titularDni);
         if (repositorio.buscarPorId(numero).isPresent()) {
             throw new OperacionInvalidaException("Ya existe una cuenta " + numero + ".");
         }
-        // Integracion: cuando Persona 1 tenga su Factory de cuentas, delegar la creacion aqui.
-        Cuenta cuenta = new CuentaAhorros(numero, titularDni, saldoInicial, new EstadoActiva());
+        // Conecto aquí mi Factory de cuentas en vez de instanciar el tipo directamente.
+        Cuenta cuenta = FabricaCuentas.crearNueva(tipo, numero, titularDni, saldoInicial);
         repositorio.guardar(cuenta);
         return cuenta;
     }

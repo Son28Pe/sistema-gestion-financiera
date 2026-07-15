@@ -2,7 +2,8 @@ package modelo;
 
 import java.time.LocalDateTime;
 
-// STUB temporal - lo reemplaza Persona 1
+// La creo normalmente a través de factory.FabricaTransacciones, que genera el id
+// automáticamente para no tener que inventarlo a mano cada vez.
 public class Transaccion {
 
     private final String id;
@@ -24,4 +25,10 @@ public class Transaccion {
     public String getTipo() { return tipo; }
     public double getMonto() { return monto; }
     public LocalDateTime getFecha() { return fecha; }
+
+    @Override
+    public String toString() {
+        return "Transaccion{id='" + id + "', cuenta='" + numeroCuenta + "', tipo='" + tipo
+                + "', monto=" + monto + ", fecha=" + fecha + "}";
+    }
 }

@@ -4,13 +4,11 @@ import excepciones.OperacionInvalidaException;
 import modelo.Cuenta;
 import observer.EventoCuenta;
 import observer.EventoCuenta.TipoEvento;
+import singleton.ConfiguracionGlobal;
 
 // Estado inicial. Opera con normalidad y decide las transiciones a Sobregirada,
 // Bloqueada y Cerrada.
 public class EstadoActiva implements IEstadoCuenta {
-
-    // Sobregiro máximo permitido. Provisional: luego vendrá de la config global (Singleton, Persona 1).
-    private static final double LIMITE_SOBREGIRO = -500.0;
 
     @Override
     public void depositar(Cuenta cuenta, double monto) {
@@ -23,7 +21,8 @@ public class EstadoActiva implements IEstadoCuenta {
     @Override
     public void retirar(Cuenta cuenta, double monto) {
         double nuevoSaldo = cuenta.getSaldo() - monto;
-        if (nuevoSaldo < LIMITE_SOBREGIRO) {
+        double limiteSobregiro = ConfiguracionGlobal.getInstancia().getLimiteSobregiro();
+        if (nuevoSaldo < limiteSobregiro) {
             throw new OperacionInvalidaException(
                     "Fondos insuficientes: el retiro supera el límite de sobregiro.");
         }

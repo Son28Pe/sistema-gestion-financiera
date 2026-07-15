@@ -3,9 +3,8 @@ package repositorio;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import excepciones.OperacionInvalidaException;
+import factory.FabricaCuentas;
 import modelo.Cuenta;
-import modelo.CuentaAhorros;
 import state.EstadoFactory;
 import state.IEstadoCuenta;
 
@@ -38,11 +37,8 @@ public class RepositorioCuentaJson extends RepositorioJsonBase<Cuenta> {
         String titularDni = d.get("titularDni");
         double saldo = Double.parseDouble(d.get("saldo"));
         IEstadoCuenta estado = EstadoFactory.desdeNombre(d.get("estado"));
-        // Integracion: cuando Persona 1 tenga su Factory de cuentas, delegar la creacion aqui.
-        return switch (d.get("tipo")) {
-            case "AHORROS" -> new CuentaAhorros(numero, titularDni, saldo, estado);
-            default -> throw new OperacionInvalidaException(
-                    "Tipo de cuenta no soportado aun: " + d.get("tipo"));
-        };
+        // Uso reconstruir() (no crearNueva()) porque el estado ya viene resuelto desde el
+        // JSON y no quiero que se reinicie a Activa.
+        return FabricaCuentas.reconstruir(d.get("tipo"), numero, titularDni, saldo, estado);
     }
 }

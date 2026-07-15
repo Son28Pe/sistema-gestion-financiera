@@ -74,5 +74,6 @@ public class MainPrueba {
     private static void limpiarDatosDemo() throws IOException {
         Files.deleteIfExists(Path.of("data/cuentas.json"));
         Files.deleteIfExists(Path.of("data/clientes.json"));
+        Files.deleteIfExists(Path.of("data/historial.json"));
     }
 }

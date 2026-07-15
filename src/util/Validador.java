@@ -22,6 +22,20 @@ public final class Validador {
         }
     }
 
+    public static void validarDni(String dni) {
+        validarTexto(dni, "DNI");
+        if (!dni.matches("\\d{8}")) {
+            throw new OperacionInvalidaException("El DNI debe contener exactamente 8 números.");
+        }
+    }
+
+    public static void validarEmail(String email) {
+        validarTexto(email, "correo");
+        if (!email.contains("@") || email.startsWith("@") || email.endsWith("@")) {
+            throw new OperacionInvalidaException("El correo electrónico no tiene un formato válido.");
+        }
+    }
+
     public static void validarNoNulo(Object obj, String nombre) {
         if (obj == null) {
             throw new OperacionInvalidaException("'" + nombre + "' no puede ser nulo.");
