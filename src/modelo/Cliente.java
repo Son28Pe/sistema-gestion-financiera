@@ -2,10 +2,7 @@ package modelo;
 
 import util.Validador;
 
-// Reemplazo el stub que había en el repo. Mantengo el mismo constructor y los mismos
-// getters/setters (getDni, getNombre, getCorreo, setNombre, setCorreo) porque el
-// ControladorCliente de mi compañero ya trabaja contra esa forma y no quiero romperle nada.
-// Le agrego validación con Validador para no dejar pasar datos vacíos.
+// Entidad Cliente: valida sus datos en el constructor y en los setters.
 public class Cliente {
 
     private final String dni;   // identificador

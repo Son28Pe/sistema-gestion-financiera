@@ -14,14 +14,13 @@ import observer.RegistroHistorial;
 import repositorio.RepositorioClienteJson;
 import repositorio.RepositorioCuentaJson;
 
-// Main de prueba (temporal): corre el flujo completo de la parte de Persona 2 sin el menu.
-// La vista/menu real la hara Persona 3.
+// Main de prueba: corre el flujo completo de negocio sin el menú.
 public class MainPrueba {
 
     public static void main(String[] args) throws IOException {
         limpiarDatosDemo();
 
-        // Cableado (en el sistema real lo arma la Facade de Persona 3).
+        // Cableado manual (normalmente lo arma la Facade).
         var repoClientes = new RepositorioClienteJson();
         var repoCuentas = new RepositorioCuentaJson();
         var historial = new RegistroHistorial();

@@ -37,8 +37,7 @@ public class RepositorioCuentaJson extends RepositorioJsonBase<Cuenta> {
         String titularDni = d.get("titularDni");
         double saldo = Double.parseDouble(d.get("saldo"));
         IEstadoCuenta estado = EstadoFactory.desdeNombre(d.get("estado"));
-        // Uso reconstruir() (no crearNueva()) porque el estado ya viene resuelto desde el
-        // JSON y no quiero que se reinicie a Activa.
+        // reconstruir() (no crearNueva()): el estado ya viene resuelto del JSON.
         return FabricaCuentas.reconstruir(d.get("tipo"), numero, titularDni, saldo, estado);
     }
 }

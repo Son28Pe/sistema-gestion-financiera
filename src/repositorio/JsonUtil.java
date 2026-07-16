@@ -5,8 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-// JSON escrito a mano (sin librerias). Solo maneja arreglos de objetos PLANOS: aisla el
-// formato del resto del sistema. El parser tolera valores con o sin comillas.
+// JSON escrito a mano (sin librerías): solo arreglos de objetos planos.
 public final class JsonUtil {
 
     private JsonUtil() {}

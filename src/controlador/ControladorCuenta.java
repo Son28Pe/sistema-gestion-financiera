@@ -26,8 +26,7 @@ public class ControladorCuenta {
         this.observadores = observadores;
     }
 
-    // Mantengo la firma de 3 argumentos porque ya se usa en otras partes del proyecto;
-    // por defecto crea una cuenta de AHORROS.
+    // Sobrecarga por defecto: crea una cuenta de AHORROS.
     public Cuenta registrar(String numero, String titularDni, double saldoInicial) {
         return registrar(numero, titularDni, saldoInicial, "AHORROS");
     }
@@ -39,7 +38,7 @@ public class ControladorCuenta {
         if (repositorio.buscarPorId(numero).isPresent()) {
             throw new OperacionInvalidaException("Ya existe una cuenta " + numero + ".");
         }
-        // Conecto aquí mi Factory de cuentas en vez de instanciar el tipo directamente.
+        // Uso la Factory en vez de instanciar el tipo directamente.
         Cuenta cuenta = FabricaCuentas.crearNueva(tipo, numero, titularDni, saldoInicial);
         repositorio.guardar(cuenta);
         return cuenta;

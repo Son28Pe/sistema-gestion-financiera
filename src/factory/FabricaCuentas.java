@@ -7,14 +7,10 @@ import modelo.CuentaCorriente;
 import state.EstadoActiva;
 import state.IEstadoCuenta;
 
-// Mi Factory: centralizo aquí la creación de Cuenta según su "tipo" (String), para que
-// ni el controlador ni el repositorio tengan que conocer las subclases concretas. Así,
-// si mañana agrego un tipo de cuenta nuevo, solo toco este archivo (no ControladorCuenta
-// ni RepositorioCuentaJson).
-//
-// Expongo dos métodos porque tengo dos escenarios distintos:
-//  - crearNueva:  alta de una cuenta nueva -> siempre arranca en EstadoActiva.
-//  - reconstruir: se usa al leer desde JSON -> el estado ya viene resuelto, no lo reinicio.
+// Factory de cuentas: centraliza la creación según el "tipo", aislando a controlador y
+// repositorio de las subclases concretas.
+//  - crearNueva:  cuenta nueva -> arranca en EstadoActiva.
+//  - reconstruir: al leer de JSON -> conserva el estado ya resuelto.
 public final class FabricaCuentas {
 
     private FabricaCuentas() {}

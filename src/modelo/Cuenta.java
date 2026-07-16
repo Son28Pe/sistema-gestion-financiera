@@ -9,12 +9,7 @@ import observer.ISujeto;
 import state.IEstadoCuenta;
 import util.Validador;
 
-// Reemplazo el stub que había en el repo, pero dejo intacto el contrato que necesita mi
-// compañero de State y Observer: el campo IEstadoCuenta con la delegación en
-// depositar/retirar/bloquear/desbloquear/cerrar, la implementación de ISujeto (lista de
-// observadores + notificar) y todos los getters/setters que ya se usan en controlador/ y
-// repositorio/. No cambio ninguna firma pública, solo agrego validación en el constructor
-// y equals/hashCode/toString para que sea más fácil depurar.
+// Entidad Cuenta: contexto del patrón State (campo estado) y Sujeto del patrón Observer.
 public abstract class Cuenta implements ISujeto {
 
     private final String numero;        // identificador

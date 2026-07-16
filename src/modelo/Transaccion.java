@@ -2,8 +2,7 @@ package modelo;
 
 import java.time.LocalDateTime;
 
-// La creo normalmente a través de factory.FabricaTransacciones, que genera el id
-// automáticamente para no tener que inventarlo a mano cada vez.
+// Transacción de cuenta. Se crea vía FabricaTransacciones (id automático).
 public class Transaccion {
 
     private final String id;

@@ -4,8 +4,7 @@ import java.util.Optional;
 
 import excepciones.OperacionInvalidaException;
 
-// GRASP Fabricacion Pura: agrupa validaciones reutilizables e independientes del estado.
-// No es una entidad del dominio; existe para no ensuciar el controlador ni duplicar reglas.
+// GRASP Fabricación Pura: validaciones reutilizables, fuera del controlador.
 public final class Validador {
 
     private Validador() {} // utilidad sin estado: no se instancia
@@ -42,7 +41,7 @@ public final class Validador {
         }
     }
 
-    // Devuelve la entidad si existe; si no, lanza. Uso: requerirExistencia(repo.buscarPorId(id), "cuenta " + id)
+    // Devuelve la entidad si existe; si no, lanza.
     public static <T> T requerirExistencia(Optional<T> encontrado, String descripcion) {
         return encontrado.orElseThrow(
                 () -> new OperacionInvalidaException("No existe: " + descripcion + "."));
